@@ -95,7 +95,7 @@ If specified, files with unspecified extensions are ignored.
 Each ext should start with `.`.  
 default: `(empty)`
 
-## bool retain
+### bool retain
 
 If true, ofxWatcher keeps the `shared_ptr` created by `ofxWatchPath`.  
 If you want to control the object's lifecycle, call `ofxWatchPath` with `retain=false`.  
