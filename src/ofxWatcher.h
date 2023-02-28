@@ -87,8 +87,8 @@ private:
 };
 }}
 
-typedef ofx::watcher::Watcher::Option ofxWatcherOption;
-
+typedef ofx::watcher::Watcher ofxWatcher;
+typedef ofxWatcher::Option ofxWatcherOption;
 
 namespace detail {
 
@@ -112,13 +112,13 @@ auto apply(Func f, Args &&...args)
 }
 
 namespace {
-std::multimap<std::filesystem::path, std::shared_ptr<ofx::watcher::Watcher>> watchers;
+std::multimap<std::filesystem::path, std::shared_ptr<ofxWatcher>> watchers;
 }
 
 template<typename Func>
-std::shared_ptr<ofx::watcher::Watcher> ofxWatchPath(std::filesystem::path path, Func func, ofxWatcherOption option={}, bool retain=true)
+std::shared_ptr<ofxWatcher> ofxWatchPath(std::filesystem::path path, Func func, ofxWatcherOption option={}, bool retain=true)
 {
-	auto subscriber = std::make_shared<ofx::watcher::Watcher>(path, [func](std::filesystem::path path) {
+	auto subscriber = std::make_shared<ofxWatcher>(path, [func](std::filesystem::path path) {
 		detail::apply(func, path, path);
 	});
 	if(retain) {
@@ -130,7 +130,7 @@ std::shared_ptr<ofx::watcher::Watcher> ofxWatchPath(std::filesystem::path path, 
 }
 
 template<typename Loader, typename Then>
-std::shared_ptr<ofx::watcher::Watcher> ofxWatchPath(std::filesystem::path path, Loader loader, Then then, ofxWatcherOption option={}, bool retain=true)
+std::shared_ptr<ofxWatcher> ofxWatchPath(std::filesystem::path path, Loader loader, Then then, ofxWatcherOption option={}, bool retain=true)
 {
 	return ofxWatchPath(path, [loader,then](std::filesystem::path path) {
 		detail::apply(then, loader(path), path);
