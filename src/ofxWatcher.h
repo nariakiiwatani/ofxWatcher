@@ -56,7 +56,7 @@ private:
 	std::vector<Token> token_;
 	std::vector<std::filesystem::path> listDir(std::filesystem::path path, bool recursive, Option option) const;
 	
-	std::map<std::filesystem::path, std::time_t> files_cache_;
+	std::map<std::filesystem::path, std::filesystem::file_time_type> files_cache_;
 	std::vector<std::filesystem::path> updated_;
 	bool update(std::filesystem::path path);
 };

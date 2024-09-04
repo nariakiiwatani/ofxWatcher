@@ -28,17 +28,17 @@ bool Token::isMatch(std::string name) const
 namespace {
 std::size_t get_type_flag(fs::file_type type) {
 	switch(type) {
-		case fs::status_error:		return ::NONE;
-		case fs::file_not_found:	return ::NOT_FOUND;
-		case fs::regular_file:		return ::REGULAR;
-		case fs::directory_file:	return ::DIRECTORY;
-		case fs::symlink_file:		return ::SYMLINK;
-		case fs::block_file:		return ::BLOCK;
-		case fs::character_file:	return ::CHARACTER;
-		case fs::fifo_file:			return ::FIFO;
-		case fs::socket_file:		return ::SOCKET;
-		case fs::reparse_file:		return ::REPARSE;
-		case fs::type_unknown:		return ::UNKNOWN;
+		case fs::file_type::none:		return ::NONE;
+		case fs::file_type::not_found:	return ::NOT_FOUND;
+		case fs::file_type::regular:		return ::REGULAR;
+		case fs::file_type::directory:	return ::DIRECTORY;
+		case fs::file_type::symlink:		return ::SYMLINK;
+		case fs::file_type::block:		return ::BLOCK;
+		case fs::file_type::character:	return ::CHARACTER;
+		case fs::file_type::fifo:			return ::FIFO;
+		case fs::file_type::socket:		return ::SOCKET;
+		//case fs::file_type::reparse:		return ::REPARSE;
+		case fs::file_type::unknown:		return ::UNKNOWN;
 		default: return 0;
 	}
 }
